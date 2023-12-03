@@ -4,13 +4,12 @@ import json
 import os
 import glob
 
-def filecheck(path):
-    return True
+def pathcheckinvalid(path):
+    return os.path.isfile(path)
 
 def parseVideoInfoFile(path):
     videoinfo = {}
     vinfofile = os.path.join(path, '.videoInfo')
-    print(vinfofile)
     with open(vinfofile, 'r') as f:
         data = json.load(f)
         videoinfo["groupname"] = data["groupTitle"]
@@ -29,18 +28,23 @@ def getVideoAudioFile(path):
         return (m4sfiles[1], m4sfiles[0])
     
 
-def getVideoMeta(path):
-    if not filecheck(path):
-        print("path {0} check fail".format(path))
-        return 1
-        
+def getVideoMeta(path):        
     video = parseVideoInfoFile(path)
     va = getVideoAudioFile(path)
     video["video"] = va[0]
     video["audio"] = va[1]
+    video["step"] = 0
     
-    print(video)
+    return video
     
+def addToFileQueue(path, show=False):
+    fileinfos = []
+    for dirpath in os.listdir(path):
+        if not pathcheckinvalid(os.path.join(path, dirpath)):
+            fileinfos.append(getVideoMeta(os.path.join(path, dirpath)))
     
-path = r'./1316729774'
-getVideoMeta(path)
+    if show is True:
+        for item in fileinfos:
+            print("get videometa", item)
+                
+    return fileinfos
