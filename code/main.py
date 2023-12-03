@@ -43,6 +43,6 @@ if __name__ == "__main__":
     tuneFile(destpath, filequeue[0])
 
     
-    #st = threading.Thread(target=scanTask, args=[procnum])
-    #st.start()
-    #st.join()
+    st = threading.Thread(target=scanTask, args=[procnum])
+    st.start()
+    st.join()
