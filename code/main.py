@@ -4,6 +4,7 @@ import sys
 import threading
 import time
 from title import addToFileQueue
+from tune import tuneFile
 
 def addFileMock():
     filequeue.append({"file": "hello.txt",
@@ -38,7 +39,9 @@ if __name__ == "__main__":
     frompath = sys.argv[2]
     destpath = sys.argv[3]
     
-    addToFileQueue(frompath, show=False)
+    filequeue.extend(addToFileQueue(frompath, show=False))
+    tuneFile(destpath, filequeue[0])
+
     
     #st = threading.Thread(target=scanTask, args=[procnum])
     #st.start()
