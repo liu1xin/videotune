@@ -37,7 +37,7 @@ def tuneFile(destpath, item):
     #todo destpath clean
 
     # prepare grouppath
-    grouppath = os.path.join(destpath, item.get("groupid"))
+    grouppath = os.path.join(destpath, str(item.get("groupid")))
     if not os.path.exists(grouppath):
         os.mkdir(grouppath)
     

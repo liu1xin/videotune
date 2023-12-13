@@ -40,12 +40,8 @@ if __name__ == "__main__":
     destpath = sys.argv[3]
     
     filequeue.extend(addToFileQueue(frompath, show=False))
-    tuneFile(destpath, filequeue[0])
-    tuneFile(destpath, filequeue[1])
-    tuneFile(destpath, filequeue[2])
-    tuneFile(destpath, filequeue[3])
-              
-             
+    for item in filequeue:
+        tuneFile(destpath, item)
 
     #st = threading.Thread(target=scanTask, args=[procnum])
     #st.start()
