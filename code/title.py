@@ -13,6 +13,7 @@ def parseVideoInfoFile(path):
     with open(vinfofile, 'r') as f:
         data = json.load(f)
         videoinfo["groupname"] = data["groupTitle"]
+        videoinfo["groupid"] = data["groupId"]
         videoinfo["filename"] = data["title"]
         videoinfo["cid"] = data["cid"]
         
